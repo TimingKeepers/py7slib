@@ -281,7 +281,8 @@ class SerialWindows(ConsoleBridge) :
             # timeout between each write
             for c in cmd :
                 bwr += self._serial.write(c)
-                time.sleep(self.INTERCHARTIMEOUT) # Intern interCharTimeout isn't working, so put a manual timeout
+                #time.sleep(self.INTERCHARTIMEOUT) # Intern interCharTimeout isn't working, so put a manual timeout
+                time.sleep(0.001)
             self._serial.flush() # Wait until all data is written
 
             if bwr != len(cmd):

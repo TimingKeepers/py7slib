@@ -291,7 +291,8 @@ class ConsoleBridge():
                 port_i = port_name + str(i)
 
                 _serial = serial.Serial(port_i, 115200, timeout=0.5)
-                _serial.setWriteTimeout(0.5)
+                if sys.platform == 'linux2' :
+                    _serial.setWriteTimeout(0.5)
                 _serial.write(chr(27))#write an ESC if gui is enabled
                 time.sleep(0.01)
                 _serial.write(chr(13)) #write an ENTER for cleaning the ESC command to the input buffer if gui was disabled
