@@ -31,11 +31,11 @@ import time
 from subprocess import check_output
 
 # User defined imports
-from consolebridge import ConsoleBridge
-from ethbone import EthBone
-from core.p7sException import p7sException
-from bridges.sdb import SDBNode
-from core.gendrvr import BusCritical, BusWarning
+from py7slib.bridges.consolebridge import ConsoleBridge
+from py7slib.bridges.ethbone import EthBone
+from py7slib.core.p7sException import p7sException
+from py7slib.bridges.sdb import SDBNode
+from py7slib.core.gendrvr import BusCritical, BusWarning
 
 
 class VUART_bridge(ConsoleBridge):
@@ -251,7 +251,7 @@ class VUART_bridge(ConsoleBridge):
         return self.bus.devread(bar, offset, width)
 
     @staticmethod
-    def scan(bus="all", subnet="192.168.7.0/24"):
+    def scan(bus="all", subnet="192.168.7.0/29"):
         '''
         Method to scan WR devices connected to the PC.
 
@@ -267,7 +267,7 @@ class VUART_bridge(ConsoleBridge):
                 · "pci" : Scan only devices conneted to the PCI bus.
                 · "eth" : Scan only devices conneted to Ethernet with Etherbone.
             subnet(str) : Subnet IP address to scan for devices. Only used with
-            option "eth" or "all". Example: subnet="192.168.7.0/24".
+            option "eth" or "all". Example: subnet="192.168.7.0/29".
 
         Returns:
             A dict where the keys are the seen before. The value is a list with

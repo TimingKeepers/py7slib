@@ -291,7 +291,7 @@ class WRConsole(ConsoleBridge):
                 lock.release()
                 repeat = repeat + 1
                 if repeat >= 2:
-                    print "el comando que falla es " + cmd
+                    #print "el comando que falla es " + cmd
                     raise (e)
                     #print "error en sendCommand de WRConsole"
                     #return None
@@ -318,7 +318,7 @@ class WRConsole(ConsoleBridge):
                 · "eth" : Scan only devices conneted to Ethernet with Etherbone.
                 · "serial" : Scan only devices conneted to a serial port.
             subnet(str) : Subnet IP address to scan for devices. Only used with
-            option "eth" or "all". Example: subnet="192.168.7.0/24".
+            option "eth" or "all". Example: subnet="192.168.7.0/29".
 
 
         Returns:

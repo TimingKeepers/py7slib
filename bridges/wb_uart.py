@@ -26,9 +26,9 @@ Implement the access to wishbone UART
 # download it from http://www.gnu.org/licenses/lgpl-2.1.html                   |
 #------------------------------------------------------------------------------|
 
-from core.p7sException import *
-from core.serial_str_cleaner import *
-from core.gendrvr import *
+from py7slib.core.p7sException import *
+from py7slib.core.serial_str_cleaner import *
+from py7slib.core.gendrvr import *
 import subprocess
 import os
 import serial

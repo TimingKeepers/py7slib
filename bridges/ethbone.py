@@ -81,8 +81,8 @@ import binascii
 from subprocess import check_output
 
 # Import common modules
-from core.gendrvr import *
-from core.p7sException import p7sException
+from py7slib.core.gendrvr import *
+from py7slib.core.p7sException import *
 
 EB_PROTOCOL_VERSION = 1
 EB_ABI_VERSION      = 0x04

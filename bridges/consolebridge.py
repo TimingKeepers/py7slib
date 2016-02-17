@@ -33,7 +33,7 @@ import time
 from subprocess import check_output
 
 # User defined imports
-from core.p7sException import p7sException
+#from core.p7sException import p7sException
 from ethbone import EthBone
 
 
@@ -137,7 +137,7 @@ class ConsoleBridge():
                 · "eth" : Scan only devices conneted to Ethernet with Etherbone.
                 · "serial" : Scan only devices conneted to a serial port.
             subnet(str) : Subnet IP address to scan for devices. Only used with
-            option "eth" or "all". Example: subnet="192.168.7.0/24".
+            option "eth" or "all". Example: subnet="192.168.7.0/29".
             numport (str) : Number of ports to scan in serial interface
 
 
@@ -195,7 +195,7 @@ class ConsoleBridge():
 
         Args:
             subnet(str) : Subnet IP address to scan for devices. Only used with
-            option "eth" or "all". Example: subnet="192.168.7.0/24".
+            option "eth" or "all". Example: subnet="192.168.7.0/29".
 
         Returns:
             A dict where the keys are the seen before. The value is a list with
@@ -224,7 +224,7 @@ class ConsoleBridge():
 
 
     @staticmethod
-    def scanEth(subnet="192.168.7.0/24"):
+    def scanEth(subnet="192.168.7.0/29"):
         '''
         Method to scan WR devices connected to the PC.
 
@@ -233,7 +233,7 @@ class ConsoleBridge():
 
         Args:
             subnet(str) : Subnet IP address to scan for devices. Only used with
-            option "eth" or "all". Example: subnet="192.168.7.0/24".
+            option "eth" or "all". Example: subnet="192.168.7.0/29".
 
         Returns:
             A dict where the keys are the seen before. The value is a list with

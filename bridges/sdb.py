@@ -38,7 +38,7 @@ from ctypes import *
 import ctypes
 
 # User defined modules
-from core.gendrvr import BusWarning, BusCritical, BusException
+from py7slib.core.gendrvr import BusWarning, BusCritical, BusException
 
 # Define specific for SDB Flags
 SDB_MAGIC                   = 0x5344422d

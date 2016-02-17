@@ -86,7 +86,8 @@ class SpiFlash:
 
         self.baseFlash = baseFlash
         self.bus = bus
-        self.debug=debug
+        #self.debug=debug
+        self.debug=True
 
     def flash_update(self,mode,mcs_file):
         '''Main Method for starting the SPI Flash operation
@@ -114,7 +115,7 @@ class SpiFlash:
         elif self.mode=="vo":
             self.voMode()
         elif self.mode=="update":
-            self.updateMode(mcs_file)
+            return self.updateMode(mcs_file)
         else:
             print "Not a valid Mode"
 
@@ -200,7 +201,7 @@ class SpiFlash:
         self.eraseFlash()
         self.programFlash(flash_packets)
         try:
-            self.endFlash()
+            return self.endFlash()
         except Exception, e:
             wc=self.bus.read(self.baseFlash+self.RWC_offset)
             print "Received words=%d (0x%08x), expected=%d" % (wc,wc,(len(flash_packets)-1)*self.PKTWORDS+len(flash_packets[-1]))
@@ -308,6 +309,7 @@ class SpiFlash:
         if PSWOK:
             print "REBOOTING"
             self.IPROG_reboot()
+            return "REBOOTING"
 
 
     def IPROG_reboot(self):
@@ -440,7 +442,7 @@ class SpiFlash:
         for i in range(0, len(lines)):
             tmp_line=lines[i][len(lines[i])-9:len(lines[i])-1]
             data_lines.append(tmp_line)
-        print data_lines[1]
+        #print data_lines[1]
 
         #Convert from str to int
         int_lines=[]
