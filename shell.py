@@ -31,6 +31,7 @@ import sys
 import socket
 
 from core.vuart import VUART_shell
+from core.p7sException import p7sException, Retry, Error
 
 
 def main():
