@@ -24,7 +24,9 @@ import os
 import re
 import subprocess
 from optparse import OptionParser
-
+# Hack to import py7slib locally
+from __path__ import path
+sys.path.append(path)
 from bridges.ethbone import EthBone
 from periph.ipc_spiflash import *
 from bridges.sdb import SDBNode

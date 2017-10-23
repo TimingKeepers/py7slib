@@ -18,7 +18,9 @@ import os
 import re
 import subprocess
 import argparse as arg
-
+# Hack to import py7slib locally
+from __path__ import path
+sys.path.append(path)
 from bridges.ethbone import *
 #from pts_core.bridges.wb_uart import *
 from periph.ipc_spiflash import *

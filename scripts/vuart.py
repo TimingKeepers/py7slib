@@ -27,11 +27,13 @@ Tool for opening an interactive shell through virtual UART.
 
 # Imports
 import argparse as arg
-import sys
+import sys, os
 import socket
-
+# Hack to import py7slib locally
+from __path__ import path
+sys.path.append(path)
+from core.p7sException import p7sException, Retry, Error
 from core.vuart import VUART_shell
-
 
 def main():
     '''
@@ -65,8 +67,6 @@ def main():
         print e
         sys.stdout.write ("\033[1;31mError\033[0m: Failed connection with the WR-LEN (%s)\n" % (args.IP))
         print ("See the manual for more deatils")
-    except Error as e:
-        print e
 
 
 if __name__ == '__main__':

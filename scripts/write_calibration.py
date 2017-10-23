@@ -30,8 +30,10 @@ Script to write the SFP calibration values to a WR Device (using WRCORE commands
 import argparse as arg
 from ConfigParser import SafeConfigParser
 import time
-import sys
-
+import sys, os
+# Hack to import py7slib locally
+from __path__ import path
+sys.path.append(path)
 # User defined imports
 from bridges.VUART_bridge import *
 from bridges.serial_bridge import *
