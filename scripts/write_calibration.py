@@ -66,7 +66,9 @@ def main():
     else:
         uart = SerialBridge(port="/dev/ttyUSB%s" % args.lun, verbose=args.debug)
     # Hack for new releases of WRC-2P
-    uart.open(interchartimeout=0.01)
+    if args.bus == 'serial':
+        uart.open(interchartimeout=0.01)
+    else: uart.open()
 
     parser = SafeConfigParser()
     ret = parser.read(args.input)
