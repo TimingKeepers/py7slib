@@ -27,6 +27,7 @@ The VUART_bridge class allows to connect with WR devices over Etherbone or PCI b
 
 # System imports
 import re
+import sys # to remove
 import time
 from subprocess import check_output
 
@@ -157,7 +158,7 @@ class VUART_bridge(ConsoleBridge):
 
         self.sendCommand("\x1b\r")
 
-    def sendCommand(self, cmd):
+    def sendCommand(self, cmd, end=True):
         '''
         Method to pass a command to the Virtual UART module of a WR Device
 
@@ -174,6 +175,7 @@ class VUART_bridge(ConsoleBridge):
 
         Args:
             cmd (str) : Command
+            end (bool) : Flag to indicate if \r should be added to the end of the command.
 
         Returns:
             A bytearray with the output of the command sent to the WR Device.
@@ -181,8 +183,17 @@ class VUART_bridge(ConsoleBridge):
         Raises:
 
         '''
+        if end:
+            if len(cmd) > 6:
+                i = 6
+                while i < len(cmd):
+                    self.sendCommand(cmd[i-6:i], False)
+                    i += 6
+                cmd = cmd[i-6:]
+            cmd = "%s\r" % (cmd)    
+
         if self.verbose and cmd != "\r":
-            print("Sending command '%s'" % (cmd))
+            print("Sending command %s" % (cmd))
         bytes = []
 
         # Wait for ready bit
@@ -196,13 +207,11 @@ class VUART_bridge(ConsoleBridge):
                 return 'Error: virtual UART is not ready' # virtual uart is not ready
 
         bytes = bytearray(cmd)
-        bytes.append(13) # insert \r
+
         try:
-            for b in bytes:
-                self.bus.devwrite(None,offset=self.VUART_OFFSET+self.VUART_TX_REG, width=4, datum=b)
-                #time.sleep(0.0008)
-                time.sleep(0.05)
-            time.sleep(0.5)
+            self.bus.devblockwrite(None, offset=self.VUART_OFFSET+self.VUART_TX_REG, ldata=bytes, incr=0x0)
+            # 200 ms seems to be enough for the LM32 to answer
+            time.sleep(0.2)
             rx_raw = self.bus.read(self.VUART_OFFSET+self.VUART_RX_REG)
             if rx_raw & self.VUART_RDY_MSK:
                 cnt = (rx_raw & self.VUART_RX_CNT_MSK) >> 9
