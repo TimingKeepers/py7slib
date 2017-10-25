@@ -27,7 +27,6 @@ The VUART_bridge class allows to connect with WR devices over Etherbone or PCI b
 
 # System imports
 import re
-import sys # to remove
 import time
 from subprocess import check_output
 

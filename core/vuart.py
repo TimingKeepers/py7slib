@@ -307,7 +307,7 @@ class VUART_shell():
         Open the interactive shell
         '''
         self.vuart.flushInput()
-        sys.stdout.write("\033[1m\nVirtual UART shell for the White Rabbit LEN board\033[0m (v1.0)\n\n")
+        sys.stdout.write("\033[1m\nVirtual UART shell for the White Rabbit LEN board\033[0m (v2.0)\n\n")
         self.print_stats()
         sys.stdout.write("Type \033[1m_help\033[0m to show the help info\n\n")
 
